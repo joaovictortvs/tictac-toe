@@ -1,8 +1,11 @@
+import Styles from './Container.module.css'
+import Lines from './Lines'
+
 function Container(){
 
     return(
         <div>
-            <h1>TIC TAC TOE</h1>
+            <Lines/>
         </div>
     )
 
