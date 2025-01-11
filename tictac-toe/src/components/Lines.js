@@ -3,7 +3,6 @@ import Styles from './Lines.module.css'
 function Lines(){
 
     let playerX_time = true
-    let playerO_time = false
 
     const tabuleiro = {
         supEsq: "", supMei: "", supDir: "",
@@ -11,34 +10,65 @@ function Lines(){
         infEsq: "", infMei: "", infDir: ""
     }
 
+    let h1_Player = null
+
     function addMark(caixaClick){
-        let verificar = verificarVelhaOuVencedor(tabuleiro)
+        let verificar = verificarVelhaOuVencedor()
+
+        h1_Player = document.querySelector("#timePlayer")
 
         let caixa = document.getElementById(caixaClick)
-        let h1_Player = document.querySelector("#timePlayer")
 
-        if(verificar === false && tabuleiro[caixaClick] === ""){
-            tabuleiro[caixaClick] = "."
+        if(tabuleiro[caixaClick] !== "" && verificar === false){
+            h1_Player.innerHTML = "Já foi escolhido!"
+            return
+        }
+
+        if(verificar === false){
             if(playerX_time){
                 caixa.innerHTML = "X"
+                tabuleiro[caixaClick] = "X"
                 caixa.classList.add(Styles.corX)
                 h1_Player.innerHTML = "Vez do Jogador O"
-                playerO_time = true
                 playerX_time = false
             } else{
                 caixa.innerHTML = "O"
+                tabuleiro[caixaClick] = "O"
                 caixa.classList.add(Styles.corO)
                 h1_Player.innerHTML = "Vez do Jogador X"
-                playerO_time = false
                 playerX_time = true
             }
-        } else{
-            h1_Player.innerHTML = "Já foi escolhido."
         } 
     }
 
-    function verificarVelhaOuVencedor(tabuleiro){ // parei aqui
-        
+    function verificarVelhaOuVencedor(){ 
+        const vitorias = [
+            ["supEsq","supMei","supDir"],
+            ["meiEsq","meiMei","meiDir"],
+            ["infEsq","infMei","infDir"],
+            ["supEsq","meiEsq","infEsq"],
+            ["supMei","meiMei","infMei"],
+            ["supDir","meiDir","infDir"],
+            ["supEsq","meiMei","infDir"],
+            ["supDir","meiMei","infEsq"]
+        ]
+
+        for(const linha of vitorias){
+            const [a,b,c] = linha;
+            if(tabuleiro[a] && tabuleiro[a] === tabuleiro[b] && tabuleiro[a] === tabuleiro[c]){
+                const vencedor = tabuleiro[a]
+                h1_Player.innerHTML = `Vencedor: Jogador ${vencedor}`
+
+                return true
+            } 
+        }
+
+        if(Object.values(tabuleiro).every((valor)=> valor !== "")){
+            h1_Player.innerHTML = "Deu velha!"
+
+            return true
+        }
+
         return false
     }
 
