@@ -1,7 +1,11 @@
 div{
-    height: 450px;
-    width: 450px;
+    height: 500px;
+    width: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: black;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px black;
+    color: white;
 }

@@ -1,6 +1,6 @@
 .container_lines{
-    width: 95%;
-    height: 95%;
+    width: 98%;
+    height: 98%;
     border: 2px solid black;
     display: flex;
     flex-direction: column;
@@ -16,6 +16,15 @@
     flex: auto;
     height: 100%;
     cursor: pointer;
-    border: 1px solid black;
-    font-size: 3em;
+    border: 1px solid white;
+    font-size: 4.5em;
+    color: white;
+}
+
+.corX{
+    color: rgb(236, 40, 40);
+}
+
+.corO{
+    color: rgb(71, 71, 238);
 }

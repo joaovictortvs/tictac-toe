@@ -4,7 +4,7 @@ import Lines from './Lines'
 function Container(){
 
     return(
-        <div>
+        <div id="tictactoe">
             <Lines/>
         </div>
     )
